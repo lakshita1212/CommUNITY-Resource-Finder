@@ -1,13 +1,7 @@
-<<<<<<< HEAD
-# React + Vite
+## Description
+In Progress Project || CommUNITY Resource Finder is a web application designed to help users locate community resources such as shelters, food pantries, and libraries based on their location. The goal is to make it easier for individuals in need to find the support and services available to them.
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
-
-Currently, two official plugins are available:
-
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
-=======
-# CommUNITY-Resource-Finder
-Web App created with React and Vite. Helps users find local essential resources such as shelters, food pantries, and libraries.
->>>>>>> origin/main
+## Features
+- Search for resources by location
+- Filter by type of resource (shelters, food pantries, libraries, etc.)
+- User-friendly interface
