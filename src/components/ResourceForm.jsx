@@ -22,7 +22,7 @@ const ResourceForm=({onSearch}) => {
             <select value={resourceType} onChange={(e) => setResourceType(e.target.value)} required>
                 <option value="">Select a resource</option>
                 <option value="shelter">Shelter</option>
-                <option value="pantry">Food Pantry</option>
+                <option value="pantry">Pantry</option>
                 <option value="library">Library</option>
             </select>
 

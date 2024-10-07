@@ -5,19 +5,38 @@ import ResourceList from "./components/ResourceList";
 
 const App = () => {
   const [resources, setResources] = useState([]);
+  const [error, setError] = useState(null); 
+  const [loading, setLoading] = useState(false);
 
-  const handleSearch =(location,resourceType) => {
-    const mockResources = [
-      { id: 1, name: 'Local Shelter', description: 'A safe place to stay', address: '123 Main St',type:'shelter' },
-      { id: 2, name: 'Food Pantry', description: 'Provides food assistance', address: '456 Elm St' ,type:'pantry'},
-      { id: 3, name: 'Public Library', description: 'Access to books and internet', address: '789 Oak St',type:'library' },
-    ];
+  const handleSearch = async (location,resourceType) => {
+    const resourceMap = {
+      shelter: 'shelter', pantry:'food pantry',library: 'library'
+    };
 
-    const filteredResources= mockResources.filter(resource => 
-      resource.type === resourceType
-    );
+    const userQuery = `${resourceMap[resourceType]} in ${location}`;
+    const osmURl = `https://nominatim.openstreetmap.org/search?q=${encodeURIComponent(userQuery)}&format=json&limit=10`;
 
-    setResources(filteredResources);
+    setLoading(true); 
+    setError(null);
+
+    try {
+      const results = await fetch(osmURl);
+      const data = await results.json();
+
+      const resourcesFromOSM= data.map((place,index) => ({
+        id:index,
+        name:place.display_name.split(',')[0],
+        address:place.display_name,
+        description: resourceType,
+      }));
+
+      setResources(resourcesFromOSM);
+    }catch (error){
+      console.error('Error getting data from OSM API',error);
+
+    }
+
+
   };
 
   return (
@@ -25,7 +44,7 @@ const App = () => {
     <h1> Community Resource Finder</h1>
     <ResourceForm onSearch={handleSearch} />
     <ResourceList resources ={resources} />    
-    
+    <button onClick={() => setResources([])}>Clear Results</button>
     </div>
   );
 };
